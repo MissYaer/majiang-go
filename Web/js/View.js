@@ -204,6 +204,7 @@
     }
 
         Majiang.View.zimo = function(player,data){
+        console.log("zimo207")
       //  var tilesSelecor = ['#bottom','#right','#top','#left'];
         var tileContainer = $(player.tilesSelector+' .float-left');
         tileContainer.append(Majiang.View.zimoHtml(player.tiles[player.tiles.length-1]));

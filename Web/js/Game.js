@@ -75,7 +75,8 @@
      * 摸牌处理
      * @param data
      */
-    Majiang.Game.prototype.zimoHandler =function(data){
+    Majiang.Game.prototype.mopaiHandler =function(data){
+        console.log("摸牌")
         var player = this._players[data.location];
         player.tiles.push(data.tile);
         player.setIfPlay(true);

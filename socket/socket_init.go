@@ -40,9 +40,17 @@ func echo(w http.ResponseWriter, r *http.Request) {
 		game_type := person["type"].(string)
 
 		switch game_type {
+		// 开局
 		case "ready":
+			// 初始化牌局
 			g_json := game.Start()
+
 			c.WriteMessage(1, []byte(g_json))
+
+			// 摸牌
+			user_mopai_json := game.UserMopai()
+			c.WriteMessage(1, []byte(user_mopai_json))
+
 		}
 
 		return

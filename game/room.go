@@ -14,6 +14,9 @@ func Start() string {
 		println(v)
 	}*/
 	return g_json
+}
 
-	//println(start_pai)
+func UserMopai() string {
+	g_json := user_mopai()
+	return g_json
 }

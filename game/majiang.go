@@ -2,6 +2,7 @@ package game
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -27,6 +28,12 @@ type GameJson struct {
 	Location string `json:"location"`
 }
 
+type MoPaiJson struct {
+	UserName string `json:"user_name"`
+	Pai      string `json:"pai"`
+	GameType string `json:"type"`
+}
+
 type Dong struct {
 	Nameid string   `json:"dong_name"`
 	Pai    []string `json:"dong_pai"`
@@ -46,6 +53,9 @@ type Bei struct {
 	Nameid string   `json:"bei_name"`
 	Pai    []string `json:"bei_pai"`
 }
+
+// 当前摸牌人,默认东家
+var current_mopai_user string = "dong"
 
 var user_dong Dong
 var user_nan Nan
@@ -76,7 +86,16 @@ func create_init_user() (g_jsons string) {
 	user_bei.Nameid = "bei"
 	user_bei.Pai = get_init_pai(13)
 
+	fmt.Println("%T", user_dong)
+
 	g := GameJson{Status: "success", Types: "kaiju", Location: "1", Dong: user_dong, Nan: user_nan, Xi: user_xi, Bei: user_bei}
+	g_json, _ := json.Marshal(g)
+	return string(g_json)
+}
+
+func user_mopai() (g_jsons string) {
+	mopai := Mopai(current_mopai_user)
+	g := MoPaiJson{UserName: current_mopai_user, Pai: mopai, GameType: "zimo"}
 	g_json, _ := json.Marshal(g)
 	return string(g_json)
 }
